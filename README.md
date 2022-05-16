@@ -26,12 +26,11 @@
 
 > resource “aws_vpc” “main” {
 >>	cidr_block = var.base_cidr_block
-> }
+>> }
 
 > <BLOCK TYPE> “<BLOCK LABEL>” “<BLOCK LABEL>”  {
->>	# Block body
->>	<IDENTIFIER> = <EXPRESSION> # argument
-> }
+>>	<IDENTIFIER> = <EXPRESSION> 
+>> }
 
 * Language consists of blocks, arguments, and expressions. Blocks are containers for objects like resources. 
 * File extension - .tf and .tf.json
