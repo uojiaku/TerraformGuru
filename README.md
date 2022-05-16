@@ -24,14 +24,14 @@
 
 #### Configuration Language Video:
 
-resource “aws_vpc” “main” {
-	cidr_block = var.base_cidr_block
-}
+> resource “aws_vpc” “main” {
+>>	cidr_block = var.base_cidr_block
+> }
 
-<BLOCK TYPE> “<BLOCK LABEL>” “<BLOCK LABEL>”  {
-	# Block body
-	<IDENTIFIER> = <EXPRESSION> # argument
-}
+> <BLOCK TYPE> “<BLOCK LABEL>” “<BLOCK LABEL>”  {
+>>	# Block body
+>>	<IDENTIFIER> = <EXPRESSION> # argument
+> }
 
 * Language consists of blocks, arguments, and expressions. Blocks are containers for objects like resources. 
 * File extension - .tf and .tf.json
