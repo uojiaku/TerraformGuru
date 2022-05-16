@@ -28,8 +28,8 @@
 >>	cidr_block = var.base_cidr_block
 >> }
 
-> *<BLOCK TYPE>* *"<BLOCK LABEL>”* *“<BLOCK LABEL>”*  {
->>	*<IDENTIFIER>* = *<EXPRESSION>*
+> *BLOCK TYPE* *"BLOCK LABEL”* *“BLOCK LABEL”*  {
+>>	*IDENTIFIER* = *EXPRESSION*
 >> }
 
 * Language consists of blocks, arguments, and expressions. Blocks are containers for objects like resources. 
