@@ -50,8 +50,9 @@ Resources are the most important part of the Terraform language. Resource blocks
 > resource "aws_db_instance" "example" {
     
 >> timeouts {
-    >>> *create = "60m"*
-    >>> *delete = "2h"*
+
+>>> *create = "60m"*
+>>> *delete = "2h"*
 >> } 
 
 >}
@@ -74,7 +75,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 > source, version, providers, count, for_each, lifecycle, depends_on, locals
 * Example:
 > variable "arbitrary_name" {
-    >> type = string
+>> type = string
 > }
 
 ##### Arguments and Constants
@@ -100,8 +101,8 @@ Resources are the most important part of the Terraform language. Resource blocks
 * Argument Examples -> we can add a **description** or **validation rules** to input variables
 > input variable description
 >> variable "image id" {
-    >>> type = string
-    >>> description = "The id of the machine image (AMI) to use for the server."
+>>> type = string
+>>> description = "The id of the machine image (AMI) to use for the server."
 >> }
 
 > Custom Validation Rules
