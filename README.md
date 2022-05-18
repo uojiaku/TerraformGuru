@@ -52,6 +52,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 >> timeouts {
 
 >>> *create = "60m"*
+
 >>> *delete = "2h"*
 
 >> } 
@@ -76,7 +77,9 @@ Resources are the most important part of the Terraform language. Resource blocks
 > source, version, providers, count, for_each, lifecycle, depends_on, locals
 * Example:
 > variable "arbitrary_name" {
+
 >> type = string
+
 > }
 
 ##### Arguments and Constants
@@ -102,27 +105,43 @@ Resources are the most important part of the Terraform language. Resource blocks
 * Argument Examples -> we can add a **description** or **validation rules** to input variables
 > input variable description
 >> variable "image id" {
+
 >>> type = string
+
 >>> description = "The id of the machine image (AMI) to use for the server."
+
 >> }
 
 > Custom Validation Rules
 >> variable "image_id" {
-    >>> type = string
-    >>> description = "The id of the machine image (AMI) to use for the server."
-    >>> validation {
-        >>>> condition = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
-        >>>> error_message = "The image_id value must be a valid AMI id, starting with \"ami-\"."
-  >>>  }
->>}
+
+>>> type = string
+
+>>> description = "The id of the machine image (AMI) to use for the server."
+
+>>> validation {
+        
+>>>> condition = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+
+>>>> error_message = "The image_id value must be a valid AMI id, starting with \"ami-\"."
+
+>>> }
+
+>> }
 
 * Using the sensitive argument -> prevents terraform from showing it's value in the plan or apply output 
 > variable "user_information" {
- >> type = object({
-     >>> name = string
-     >>> address = string
- >> })
- >> sensitive = true
+
+>> type = object({
+
+>>> name = string
+     
+>>> address = string
+ 
+>> })
+ 
+>> sensitive = true
+
 > }
 
 * Using input variable values
