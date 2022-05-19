@@ -25,11 +25,15 @@
 #### Configuration Language Video:
 
 > resource “aws_vpc” “main” {
+
 >>	cidr_block = var.base_cidr_block
+
 >> }
 
 > *BLOCK TYPE* *"BLOCK LABEL”* *“BLOCK LABEL”*  {
+
 >>	*IDENTIFIER* = *EXPRESSION*
+
 >> }
 
 * Language consists of blocks, arguments, and expressions. Blocks are containers for objects like resources. 
@@ -174,6 +178,57 @@ Resources are the most important part of the Terraform language. Resource blocks
 > terraform.tfvars.json
 > *.auto.tfvars or *.auto.tfvars.json
 > Any command-line options like -var and -var-file
+
+#### Declaring Output Variables -> return values
+* They have many use cases:
+>> A child module can use them to expose a subset of resource attributes to the parent module
+>> A root module can use them to print values in the CLI
+>> Root module outputs can be accessed by other configurations via the terraform_remote_state data
+>>> Each output value that is exported by a module must be declared using an output block. The label after the output keyword must be a valid identifier. Within a root module this name is displayed to the user. In a child module, it can be used to access the output's value. The value argument takes an expression whose output is to be returned to the user.
+* Optional Arguments for variable declaration
+>> description
+>>> output "instance_ip_addr" {
+
+>>>> value = aws_instance.server.private_ip
+
+>>>> description = "The private IP address of the main server instance."
+
+>>> }
+
+>> sensitive
+>>> output "out" {
+
+>>>> value = "xyz"
+
+>>>> sensitive = true
+
+>>> }
+>> depends_on
+
+>>> variable "instance_ip_addr" {
+ 
+>>>> value = aws_instance.server.private_ip
+
+>>>> description = "The private IP address of the main server instance"
+
+>>>> depends_on = [
+
+>>>> // Security group rule must be created before this IP address could 
+
+>>>> // actually be used, otherwise the services will be unreachable.
+
+>>>> aws_security_group_rule.local_access,
+
+>>>> ]
+
+>>> }
+
+#### Declaring Local Variables
+
+
+
+
+
 
 
 
