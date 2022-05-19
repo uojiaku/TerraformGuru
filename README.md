@@ -181,10 +181,10 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 #### Declaring Output Variables -> return values
 * They have many use cases:
->> A child module can use them to expose a subset of resource attributes to the parent module
->> A root module can use them to print values in the CLI
->> Root module outputs can be accessed by other configurations via the terraform_remote_state data
->>> Each output value that is exported by a module must be declared using an output block. The label after the output keyword must be a valid identifier. Within a root module this name is displayed to the user. In a child module, it can be used to access the output's value. The value argument takes an expression whose output is to be returned to the user.
+1. A child module can use them to expose a subset of resource attributes to the parent module.
+2. A root module can use them to print values in the CLI.
+3. Root module outputs can be accessed by other configurations via the terraform_remote_state data.
+4. Each output value that is exported by a module must be declared using an output block. The label after the output keyword must be a valid identifier. Within a root module this name is displayed to the user. In a child module, it can be used to access the output's value. The value argument takes an expression whose output is to be returned to the user.
 * Optional Arguments for variable declaration
 >> description
 >>> output "instance_ip_addr" {
@@ -226,8 +226,25 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 #### Declaring Local Variables
 
+* Local Values are like a function's temporary local variables
+1. allow you to assign a name to an expression
+2. allow you to use the variable multiple times within a module without repeating it
 
+> locals {
 
+ >> service_name = "forum"
+
+ >> owner = "community team"
+
+> }
+
+> resource "aws_instance" "example" {
+
+>> type = string
+
+>> tags = local.common_tags
+
+> }
 
 
 
