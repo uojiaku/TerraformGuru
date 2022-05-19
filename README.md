@@ -203,6 +203,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 >>>> sensitive = true
 
 >>> }
+
 >> depends_on
 
 >>> variable "instance_ip_addr" {
