@@ -246,6 +246,56 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 > }
 
+#### Modules -> a container for multiple resources
+they can consist of .tf files as well as .tf.json files in a directory
+
+* 3 Module Types:
+1. Root Module -> you need at least one root module.consists of the resources defined in the .tf files in the main working directory
+2. Child Modules -> modules that are called by the root module. they can be called multiple times within the same configuration. Multiple configurations can use the same child module
+3. Public Modules -> modules loaded from a public or private registry. 
+
+Calling a Child Module
+
+> module "servers" {
+
+>> source = "./app-cluster"
+
+>> servers = 5
+
+> }
+
+* Module Arguments -> 4 argument types
+1. Source argument -> required for all modules
+2. Version argument -> recommended for modules from a registry
+3. Input variable arguments
+4. Meta-arguments -> ex. for_each, depends_on, count, providers
+
+* Accessing Module Output Values
+
+1. Child modules can declare output values to selectively export values which are accessible by the calling module.
+2. if the module exported an output value named instance_ids, then the calling module can reference that result using the expression module.servers.instance_ids.. see example below:
+
+> resource "aws_elb" "example" {
+
+>> instances = "module.servers.instance_ids"
+
+> }
+
+* Transferring Resource State
+We can use the **terraform state mv** command to inform terraform that the child module block has been moved to a different module. Because? when you split code into other child modules, or when moving resource blocks between modules you can use Terraform to see the new location of the module block as an entirely different resource.
+> when passing resource addresses:
+1. Resources within the child modules must be prefixed with module."module_name"
+2. If a module is called with count or for_each, it must be prefixed with module."module_name"["index"] instead.
+
+* Taint Resources Within A Module
+command **terraform taint module."module_name"."resource_name"**
+1. It is not possible to taint an entire module. Instead each resource in a module must be tainted separately
+
+
+
+
+
+
 
 
 
