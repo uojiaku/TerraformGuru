@@ -302,12 +302,103 @@ There are 8 Module Source Types:
 > }
 
 2. terraform registry
+
+> module "consul" {
+>> source = "hashicorp/consul/aws"
+>> version = "0.1.0"
+> }
+ 
 3. GitHub
+
+https example
+> module "consul" {
+>> source = "github.com/hashicorp/example"
+> }
+
+ssh example
+> module "consul" {
+>> source = "git@github.com:hashicorp/example.git"
+> }
+
 4. BitBucket
+
+> module "consul" {
+>> source = "bitbucket.org/hashicorp/terraform-consul-aws"
+> }
+
 5. Generic Git, Mercurial repositories
+
+Generic Git
+> module "vpc" {
+>> source = "git::https://example.com/vpc.git"
+> }
+
+> module "storage" {
+>> source = "git::ssh://username@example.com/storage.git"
+> }
+
+we can select a specific revision
+> module "vpc" {
+>> source = "git::https://example.com/vpc.git?ref=v1.2.0"
+> }
+
+Generic Mercurial 
+
+> module "vpc" {
+>> source = "hg::https://example.com/vpc.hg"
+> }
+
 6. HTTP URLs
+
+if the GET request is successful, Terraform looks in the following locations:
+
+>> the value of a response header field named X-Terraform-Get
+
+>> if the response is an HTML page, a meta element w/ the name terraform-get
+
+here's the example of the meta element
+
+>> <meta name="terraform-get"
+
+>>        content="github.com/hashicorp/example" />
+
+Fetching Archives over HTTP
+
+> module "vpc" {
+
+>> source = "https://example.com/vpc-module.zip"
+
+> }
+
+The extensions Terraform recognizes are zip, tar.bz2(tbz2), tar.gz(tgz), tar.xz(txz)
+
+> module "vpc" {
+
+>> source = "https://example.com/vpc-module?archive=zip"
+
+> }
+
 7. S3 Buckets
+the module installer will look for AWS creds first by checking set environment variables: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+Second, the default profile in the .aws/credentials. Third, if it's running on an EC2 instance, it will check the temporary creds associated w/ the instance's IAM instance profile.
+
+> module "consul" {
+>> source = "s3::https://s3-eu-west-1.amazonaws.com/examplecorp-terraform-modules/vpc.zip"
+> }
+
 8. GCS buckets
+
+To set credentials:
+enter the path of your service account key file in the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+If you're running Terraform from a GCE instance, the default credentials are automatically available.
+On your computer, you can make your Google identity available by running:
+gcloud auth application-default login.
+
+> module "consul" {
+>> source = "gcs::https://googleapis.com/storage/v1/modules/foomodule.zip"
+> }
+
+
 
 
 
