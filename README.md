@@ -291,7 +291,23 @@ We can use the **terraform state mv** command to inform terraform that the child
 command **terraform taint module."module_name"."resource_name"**
 1. It is not possible to taint an entire module. Instead each resource in a module must be tainted separately
 
+##### Module Sources
+Modules Sources tell terraform where to look for source code.
+During **terraform init** module installation step, terraform uses the module source.
+There are 8 Module Source Types: 
+1. local paths -> must begin with either ./ or ../
 
+> module "consul" {
+>> source = "./consul"
+> }
+
+2. terraform registry
+3. GitHub
+4. BitBucket
+5. Generic Git, Mercurial repositories
+6. HTTP URLs
+7. S3 Buckets
+8. GCS buckets
 
 
 
