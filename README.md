@@ -358,7 +358,7 @@ if the GET request is successful, Terraform looks in the following locations:
 
 here's the example of the meta element
 
->> <meta name="terraform-get"
+>>  < meta name="terraform-get"
 
 >>        content="github.com/hashicorp/example" />
 
