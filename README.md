@@ -291,7 +291,7 @@ We can use the **terraform state mv** command to inform terraform that the child
 command **terraform taint module."module_name"."resource_name"**
 1. It is not possible to taint an entire module. Instead each resource in a module must be tainted separately
 
-##### Module Sources
+#### Module Sources
 Modules Sources tell terraform where to look for source code.
 During **terraform init** module installation step, terraform uses the module source.
 There are 8 Module Source Types: 
@@ -399,8 +399,57 @@ gcloud auth application-default login.
 > }
 
 
+#### Using Expressions and Functions
+##### Expressions -> used to reference/compute values within a configuration.
+* The simplest expressions are literal values, like ACG or 1, but the terraform language also allows more complex expressions, such as references to data exported by resources and a number of built-in functions.
+1. Terraform uses types values such as stirng, number, bool, list/tuple, map/object, null
+2. 7 types of named values in Terraform: resources, input variables, local values, child module outputs, data sources, filesystem and workspace info, block-local values
+3. Conditional expressions. syntax:
+> condition ? true_val : false_val
 
+Here's an example of conditional expressions. This defines defaults to replace invalid values:
+> var.a != "" ? var.a : "default-a"  -> if var.a is empty it will to default to the string "default-a" otherwise it will equal the actual values of var.a
 
+These result type examples perform the same functionality:
+> var.example ? 12 : "hello"
+> var.example ? tostring(12) :
+##### Functions -> used to transform and combine values withing expressions.
+Terraform includes a number of built-in functions you can call from within expressions to transform and combine values.
+Built-in function syntax:
+
+> < FUNCTION NAME > (< ARGUMENT 1 >, < ARGUMENT 2 >)
+
+function example:
+
+> min([55, 2453, 2]...)
+
+* using sensitive data as a function argument:
+
+> local.baz
+
+>> {
+
+>> "a" = (sensitive)
+
+>> "b" = "dog"
+
+>> }
+
+so if I call a function with named keys along with the local vars as an argument I get a 
+keys(local.baz)
+produces a (sensitive) output
+
+* Function calls
+
+function call general syntax:
+
+> max(5, 12, 9)
+
+We can use the terraform console and try using the max built-in function:
+
+> terraform console
+
+>> max(5, 12, 9)
 
 
 
