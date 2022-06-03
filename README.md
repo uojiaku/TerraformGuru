@@ -451,11 +451,37 @@ We can use the terraform console and try using the max built-in function:
 
 >> max(5, 12, 9)
 
+#### Backend Configuration
+Each terraform configuration can specify a backend.
+1. **local** backend for beginners
+2. **remote** backend for working with team and managing large infrastructure
 
+Terraform includes a built-in selection of backends.
+Backend configuration is only used by terraform CLI. Terraform cloud and Enterprise always use their own state storage. It is common to use terraform Cloud along with terraform CLI, so they recommend to include a backend block in their configuration and configure the remote backend to use the relevant terraform cloud workspaces.
 
+* Backend Block
 
+> terraform {
 
+>> backend "remote" {
 
+>>> organization = "corp_example"
 
+>>> workspaces {
 
+>>>> name = "ex-app-prod"    
+
+>>> }
+
+>> }
+
+> )
+
+Limitations for backend blocks:
+A configuration can only provide one backend block.
+A backend block cannot refer to named values.
+
+When the backend changes in a configuration, you must run **terraform init**
+When the backend changes, Terraform gives you the option to migrate your state.
+You can backup your state by copying the **terraform.tfstate** file
 
