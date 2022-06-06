@@ -1,8 +1,8 @@
 # TerraformGuru
 
-### Using Terraform to Manage Applications and Infrastructure
+## Using Terraform to Manage Applications and Infrastructure
 
-#### Terraform CLI Video:
+### Terraform CLI Video:
 * terraform version => find the terraform version
 * terraform -chdir=<path_to/tf> <subcommand> => switch the working directory
 * terraform plan => create an execution plan
@@ -15,14 +15,14 @@
 * terraform apply -var my_variable=<variable> => pass a variable via the command line
 * terraform destroy => destroy the managed infrastructure
 * terraform providers => get provider info used in configuration
-##### Initialize the terraform directory that contains the main.tf file
+#### Initialize the terraform directory that contains the main.tf file
 * terraform init or terraform init -upgrade
-##### Create the plan that terraform will execute with main.tf or output a deployment plan
+#### Create the plan that terraform will execute with main.tf or output a deployment plan
 * terraform plan or terraform plan -out <nameofplan>
-##### Apply the terraform plan 
+#### Apply the terraform plan 
 * terraform apply
 
-#### Configuration Language Video:
+### Configuration Language Video:
 
 > resource “aws_vpc” “main” {
 
@@ -41,16 +41,16 @@
 * Text encoding - plain text files (UTF-8), Unix-style line endings(LF), Windows-style line endings(CRLF)
 * Modules are a collection of .tf and/or .tf.json files in a directory
 
-#### Working With Resources Video:
+### Working With Resources Video:
 Resources are the most important part of the Terraform language. Resource blocks describe infrastructure objects like virtual networks, compute instances, or components like DNS records.
-##### Meta-Arguments
+#### Meta-Arguments
 * depends_on -> specify hidden dependencies
 * count -> create multiple resource instances according to a count
 * for_each -> create multiple instances according to a map or a set of strings
 * provider -> select a non-default provider configuration
 * lifecycle -> set lifecycle customizations
 * provisioner and connection -> take extra actions after resource creation
-##### Operation Timeouts
+#### Operation Timeouts
 > resource "aws_db_instance" "example" {
     
 >> timeouts {
@@ -65,18 +65,18 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 * There are some resource types that provide special timeouts, nested block arguments that allow for customization of how long certain operations are allowed to take before they are deemed failed
 
-##### How Configuration Is Applied
+#### How Configuration Is Applied
 * create -> create resources that exist in the configuration but are not associated with a real infrastructure object in the state
 * destroy -> destroy resources that exist in the state but no longer exist in the configuration
 * update in-place -> update in-place resources whose arguments have changed
 * destroy and re-create -> destroy and re-create resources whose arguments have changed, but which cannot be updated in-place due to remote API limitations
 
-##### Resource Behavior
+#### Resource Behavior
 * Local-only resources -> specialized resource types that operate only within Terraform itself, calculating some results and saving those results in the state for future use.
 > Examples: ssh keys, self-signed certs, random ids. 
 
-#### Input Variables
-##### Declaring and Input Variable
+### Input Variables Video:
+#### Declaring and Input Variable
 * the name of a variable can be any valid identifier except for:
 > source, version, providers, count, for_each, lifecycle, depends_on, locals
 * Example:
@@ -86,7 +86,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 > }
 
-##### Arguments and Constants
+#### Arguments and Constants
 * optional arguments for variable declaration:
 > default
 > type
@@ -179,7 +179,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 > *.auto.tfvars or *.auto.tfvars.json
 > Any command-line options like -var and -var-file
 
-#### Declaring Output Variables -> return values
+### Declaring Output Variables -> return values Video:
 * They have many use cases:
 1. A child module can use them to expose a subset of resource attributes to the parent module.
 2. A root module can use them to print values in the CLI.
@@ -224,7 +224,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 >>> }
 
-#### Declaring Local Variables
+### Declaring Local Variables Video:
 
 * Local Values are like a function's temporary local variables
 1. allow you to assign a name to an expression
@@ -246,7 +246,7 @@ Resources are the most important part of the Terraform language. Resource blocks
 
 > }
 
-#### Modules -> a container for multiple resources
+### Modules -> a container for multiple resources Video:
 they can consist of .tf files as well as .tf.json files in a directory
 
 * 3 Module Types:
@@ -291,7 +291,7 @@ We can use the **terraform state mv** command to inform terraform that the child
 command **terraform taint module."module_name"."resource_name"**
 1. It is not possible to taint an entire module. Instead each resource in a module must be tainted separately
 
-#### Module Sources
+### Module Sources Video:
 Modules Sources tell terraform where to look for source code.
 During **terraform init** module installation step, terraform uses the module source.
 There are 8 Module Source Types: 
@@ -399,8 +399,8 @@ gcloud auth application-default login.
 > }
 
 
-#### Using Expressions and Functions
-##### Expressions -> used to reference/compute values within a configuration.
+### Using Expressions and Functions Video:
+#### Expressions -> used to reference/compute values within a configuration.
 * The simplest expressions are literal values, like ACG or 1, but the terraform language also allows more complex expressions, such as references to data exported by resources and a number of built-in functions.
 1. Terraform uses types values such as stirng, number, bool, list/tuple, map/object, null
 2. 7 types of named values in Terraform: resources, input variables, local values, child module outputs, data sources, filesystem and workspace info, block-local values
@@ -413,7 +413,7 @@ Here's an example of conditional expressions. This defines defaults to replace i
 These result type examples perform the same functionality:
 > var.example ? 12 : "hello"
 > var.example ? tostring(12) :
-##### Functions -> used to transform and combine values withing expressions.
+#### Functions -> used to transform and combine values withing expressions.
 Terraform includes a number of built-in functions you can call from within expressions to transform and combine values.
 Built-in function syntax:
 
@@ -451,7 +451,7 @@ We can use the terraform console and try using the max built-in function:
 
 >> max(5, 12, 9)
 
-#### Backend Configuration
+### Backend Configuration Video:
 Each terraform configuration can specify a backend.
 1. **local** backend for beginners
 2. **remote** backend for working with team and managing large infrastructure
@@ -484,4 +484,230 @@ A backend block cannot refer to named values.
 When the backend changes in a configuration, you must run **terraform init**
 When the backend changes, Terraform gives you the option to migrate your state.
 You can backup your state by copying the **terraform.tfstate** file
+
+#### Enhanced Backend: Local
+> terraform {
+
+>> backend "local" {
+
+>>> path = "/path/to/terraform.tfstate"
+
+>> }
+
+> }
+
+
+we can use two configuration variables: path(which is used in the example above) -> the path to the tfstate file. workspace_dir -> the path to non-default workspaces.
+
+The data source configuration for a local backend would be:
+> data "terraform_remote_state" "zland" {
+
+>> backend = "local"
+
+>> config = {
+
+>>> path = "${path.module}/../../terraform.tfstate"
+
+>> }
+
+> }
+
+#### Enhanced Backend: Remote
+> terraform {
+
+>> backend "remote" {
+
+>>> hostname = "app.terraform.io"
+
+>>> organization = "company"
+
+>>> workspaces { 
+   
+>>>> name = "my-app-prod"
+
+>>> }
+
+>> }
+
+> }
+
+But if we wanted to specify the backend from the CLI instead of having it in the main.tf we have to give the empty brackets in the main.tf 
+
+> terraform {
+
+>> required_version = "~> 0.12.0"
+
+>> backend "remote" {}
+
+> }
+
+on the CLI we use this command:
+**terraform init -backend-config=backend.hcl**
+
+> backend.hcl 
+
+>> workspaces { 
+
+>>> name = "workspace" 
+
+>> } 
+
+>> hostname = "app.terraform.io" 
+
+>> organization = "company"
+
+##### Data Source Configuration:
+> data "terraform_remote_state" "foo" {
+
+>> backend = "remote"
+
+>> config = {
+
+>>> organization = "company"
+
+>>> workspaces = {
+
+>>>> name = "workspaces"
+
+>>> }
+
+>> }
+
+> }
+
+Configuration Variables:
+1. hostname (optional)
+2. organization (Requireed)
+3. token (optional)
+4. workspaces (Required)
+4a. name (optional)
+4b. prefix (optional)
+
+#### Standard Backend: S3
+The below block configuration will look for an s3 bucket with that key and region but it will also need the IAM permissions to do so. The permissions are: s3:ListBucket, s3:GetObject, s3:PutObject.
+If using the state locking feature, you will need the IAM permissions on the DynamoDB table.
+The permissions are: dynamodb:GetItem, dynamodb:PutItem, dynamodb:DeleteItem.
+
+The terraform remote state data source will return all of the root module outputs defined in the reference remote state.
+
+example block configuration:
+> terraform {
+
+>> backend "s3" {
+
+>>> bucket = "mybucket"
+
+>>> key = "path/to/my/key"
+
+>>> region = "us-east-1"
+
+>> }
+
+> }
+
+data source configuration:
+> data "terraform_remote_state" "network" {
+
+>> backend = "s3"
+
+>> config = {
+
+>>> bucket = "terraform-state-prod"   
+
+>>> key = "network/terraform.tfstate"   
+
+>>> region = "us-east-1"   
+
+>> }
+
+> }
+
+
+> }
+
+#### Standard Backend: azurem
+
+using azure CLI or a Service Principal:
+> terraform {
+
+>> backend "azurerm" {
+
+>>> resource_group_name = "StorageAccount-ResourceGroup"
+
+>>> storage_account_name = "abcd1234"
+
+>>> container_name = "tfstate"
+
+>>> key = "prod.terraform.tfstate"
+
+>> }
+
+> }
+
+data source using a service principal:
+> data "terraform_remote_state" "foo" {
+
+>> backend = "azurerm"  
+
+>> config = {
+    
+>>> storage_account_name = "terraform123abc"
+
+>>> container_name = "terraform-state"
+
+>>> key = "prod.terraform.tfstate"
+
+>> }
+
+> }
+
+using azure AD:
+> terraform {
+
+>> backend "azurem" {
+
+>>> storage_account_name = "abcd1234"
+
+>>> container_name = "tfstate"
+
+>>> key = "prod.terraform.tfstate"
+
+>>> use_azuread_auth = true
+
+>>> subscription_id = "0000-000-0000"
+
+>>> tenant_id = "0000-000-0000"
+
+>> }
+
+> }
+
+data source config using azure AD:
+> data "terraform_remote_state" "foo" {
+
+>> backend = "azurerm"  
+
+>> config = {
+    
+>>> storage_account_name = "terraform123abc"
+
+>>> container_name = "terraform-state"
+
+>>> key = "prod.terraform.tfstate"
+
+>>> use_azuread_auth = true
+
+>>> subscription_id = "0000-000-0000"
+
+>>> tenant_id = "0000-000-0000"
+
+>> }
+
+> }
+
+##### configuration variables -> storage_account_name (required), container_name (required), key (required), environment (optional), endpoint (optional), snapshot (optional)
+
+##### azure AD config variables -> use_azuread_auth (optional)
+
+##### service principal config variables -> resource_group_name (required), cliend_id (optional), client_certification_password (optional), client_certification_path (optional), subscription_id (optional), tenant_id (optional), client_secret (optional) 
 
