@@ -69,7 +69,7 @@ ITEM
 
 }
 
-# policy creation
+# role creation
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
@@ -90,31 +90,84 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
+# policy creation
+resource "aws_iam_policy" "iam_policy_for_lambda" {
+ 
+ name         = "aws_iam_policy_for_terraform_aws_lambda_role"
+ path         = "/"
+ description  = "AWS IAM Policy for managing aws lambda role"
+ policy = <<EOF
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Action": [
+       "logs:CreateLogGroup",
+       "logs:CreateLogStream",
+       "logs:PutLogEvents"
+     ],
+     "Resource": "arn:aws:logs:*:*:*",
+     "Effect": "Allow"
+   }
+ ]
+}
+EOF
+}
+
 # policy attachment
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
-    role = aws_iam_role.lambda_role.name
+    role = aws_iam_role.iam_for_lambda.name
     policy_arn = aws_iam_policy.iam_policy_for_lambda.arn
 }
 
-# Archive from content
+# archive from content
 data "archive_file" "zip_the_python_code" {
     type = "zip"
-    source = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy"
-    output_path = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy.zip"
+    source_dir = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy"
+    output_path = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy/lambda_function.zip"
 }
 
+# create the Lambda function
 resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a 
   # path.module in the filename.
-  filename      = "lambda_function_payload.zip"
-  function_name = "lambda_function_name"
+  filename      = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy/lambda_function.zip"
+  function_name = "lambda_function"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "index.test"
-  runtime = "python3.8"
+  handler       = "lambda_function.get_products"
+  runtime       = "python3.9"
+  depends_on    = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
+}
 
-  environment {
-    variables = {
-      foo = "bar"
+# create api gateway rest api
+resource "aws_api_gateway_rest_api" "mbu" {
+  body = jsonencode({
+    openapi = "3.0.1"
+    info = {
+      title   = "mbu"
+      version = "1.0"
     }
+    paths = {
+      "/path1" = {
+        get = {
+          x-amazon-apigateway-integration = {
+            httpMethod           = "GET"
+            payloadFormatVersion = "1.0"
+            type                 = "HTTP_PROXY"
+            uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+          }
+        }
+      }
+    }
+  })
+
+  name = "mbu"
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
   }
 }
+
+
+
+
