@@ -711,3 +711,5 @@ data source config using azure AD:
 
 ##### service principal config variables -> resource_group_name (required), cliend_id (optional), client_certification_password (optional), client_certification_path (optional), subscription_id (optional), tenant_id (optional), client_secret (optional) 
 
+
+#### Standard Backend: S3
