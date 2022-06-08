@@ -2,7 +2,7 @@
 
 # Local .terraform directories
 **/eks-setup/.terraform/*
-
+**/eks-setup/metrics-server-0.3.6
 # .tfstate files
 *.tfstate
 *.tfstate.*
