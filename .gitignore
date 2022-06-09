@@ -4,6 +4,7 @@
 **/eks-setup/.terraform/*
 **/eks-setup/metrics-server-0.3.6
 **/mysql/metrics-server-0.3.6
+**/mysql/.terraform/*
 
 # .tfstate files
 *.tfstate
