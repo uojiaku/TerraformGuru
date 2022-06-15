@@ -123,15 +123,15 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
 # archive from content
 data "archive_file" "zip_the_python_code" {
     type = "zip"
-    source_dir = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy"
-    output_path = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy/lambda_function.zip"
+    source_dir = "/Users/ojiakuboss/TerraformGuru/pyguy"
+    output_path = "/Users/ojiakuboss/TerraformGuru/pyguy/lambda_function.zip"
 }
 
 # create the Lambda function
 resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a 
   # path.module in the filename.
-  filename      = "/Users/ojiakuboss/Documents/TerraformGuru/pyguy/lambda_function.zip"
+  filename      = "/Users/ojiakuboss/TerraformGuru/pyguy/lambda_function.zip"
   function_name = "lambda_function"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "lambda_function.get_products"
