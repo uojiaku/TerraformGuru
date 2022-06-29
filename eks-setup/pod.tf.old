@@ -1,4 +1,17 @@
-resource  "kubernetes_manifest" "test" {
-    provider = kubernetes-alpha
-    manifest = yamldecode(file("pod.yaml"))
+provider "kubectl" {}
+
+resource  "kubectl_manifest" "test" {
+  yaml_body = <<YAML
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: redis-storage
+  name: redis-storage
+spec:
+  containers:
+  - image: redis:alpine
+    name: goat
+YAML
 }
