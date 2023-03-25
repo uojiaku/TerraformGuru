@@ -1,5 +1,5 @@
 .terraform
-tf-key-pair
+DeployManyEc2/tf-key-pair
 # Local .terraform directories
 **/eks-setup/.terraform/*
 **/eks-setup/metrics-server-0.3.6
