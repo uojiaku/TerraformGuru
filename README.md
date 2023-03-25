@@ -475,7 +475,7 @@ Backend configuration is only used by terraform CLI. Terraform cloud and Enterpr
 
 >> }
 
-> )
+> }
 
 Limitations for backend blocks:
 A configuration can only provide one backend block.
@@ -623,7 +623,7 @@ data source configuration:
 > }
 
 
-> }
+
 
 #### Standard Backend: azurem
 
@@ -713,3 +713,10 @@ data source config using azure AD:
 
 
 #### Standard Backend: S3
+
+### Demo: Building Your Infrastructure Configuration Video:
+
+use ACG-Terraform-course folder, the main.tf was downloaded.
+
+* terraform fmt => to make sure our configuration is formatted correctly
+* terraform validate => to validate configuration
