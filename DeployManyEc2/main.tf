@@ -144,7 +144,7 @@ resource "aws_instance" "first_instance" {
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 0)
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group.security_group_id]
   key_name               = "tf-key-pair"
 
   user_data_base64            = base64encode(var.user_data)
@@ -166,7 +166,7 @@ resource "aws_instance" "second_instance" {
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 1) 
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group.security_group_id]
   key_name               = "tf-key-pair"
 
   user_data_base64            = base64encode(var.user_data)
@@ -187,7 +187,7 @@ resource "aws_instance" "third_instance" {
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 2) 
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group.security_group_id]
   key_name               = "tf-key-pair"
 
   user_data_base64            = base64encode(var.user_data)
@@ -288,12 +288,65 @@ data "aws_ami" "rhel_8_5" {
   }
 }
 
-module "security_group" {
+#################################################################
+################# Instances Security Group for HTTP #############
+
+resource "aws_security_group_rule" "inbound_http" {
+  type            = "ingress"
+  from_port       = 80
+  to_port         = 80
+  protocol        = "tcp"
+  source_security_group_id = module.alb_security_group.security_group_id
+
+  security_group_id = module.instance_security_group.security_group_id
+}
+
+resource "aws_security_group_rule" "outbound_http" {
+  type            = "egress"
+  from_port       = 80
+  to_port         = 80
+  protocol        = "tcp"
+  source_security_group_id =  module.instance_security_group.security_group_id
+
+  security_group_id = module.alb_security_group.security_group_id
+}
+
+#################################################################
+################# Instances Security Group ######################
+module "instance_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
-  name        = local.name
-  description = "Security group for example usage with EC2 instance"
+  name        = "instance-security-group"
+  description = "Security group for instances!!!"
+  # vpc_id      = module.vpc.vpc_id
+
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["ssh-tcp", "all-icmp"]
+  # ingress_rules       = ["http-80-tcp", "ssh-tcp", "all-icmp"] // old
+  # egress_rules        = ["all-all"]
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      description = "Open internet I think"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
+  tags = local.tags
+}
+
+#############################################################
+#################### ALB Security Group #####################
+module "alb_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4.0"
+
+  name        = "alb-security-group"
+  description = "Security group for ALB!!"
   # vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
@@ -383,7 +436,7 @@ module "alb" {
 
   vpc_id             = data.aws_vpc.default.id
   subnets            = element([data.aws_subnet_ids.example.ids], 0)
-  security_groups    = [module.security_group.security_group_id]
+  security_groups    = [module.alb_security_group.security_group_id]
 
 
   target_groups = [
@@ -417,6 +470,33 @@ module "alb" {
       target_group_index = 0
     }
   ]
+
+ http_tcp_listener_rules = [
+    {
+      http_tcp_listener_index = 0
+      priority                = 3
+      actions = [{
+        type         = "fixed-response"
+        content_type = "text/plain"
+        status_code  = 200
+        message_body = "This is a fixed response"
+      }]
+
+      conditions = [{
+        http_headers = [{
+          http_header_name = "x-Gimme-Fixed-Response"
+          values           = ["yes", "please", "right now"]
+        }],
+        query_string = [{
+          key = "health"
+          value = "check"
+        }],
+        query_string = [{
+          value = "bar"
+        }]
+      }]
+    },
+ ]
 
   tags = {
     Environment = "Test"

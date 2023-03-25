@@ -43,6 +43,9 @@ output "aws_sub" {
   description = "vpc subnet"
   value       = element([data.aws_subnet_ids.example.ids], 0)
 }
+output "z-alb_security_group" {
+  value = module.alb_security_group
+}
 
 # output "instance_id_2" {
 #   description = "EC2 instance ID"
