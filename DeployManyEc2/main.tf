@@ -471,37 +471,45 @@ module "alb" {
     }
   ]
 
- http_tcp_listener_rules = [
-    {
-      http_tcp_listener_index = 0
-      priority                = 3
-      actions = [{
-        type         = "fixed-response"
-        content_type = "text/plain"
-        status_code  = 200
-        message_body = "This is a fixed response"
-      }]
-
-      conditions = [{
-        http_headers = [{
-          http_header_name = "x-Gimme-Fixed-Response"
-          values           = ["yes", "please", "right now"]
-        }],
-        query_string = [{
-          key = "health"
-          value = "check"
-        }],
-        query_string = [{
-          value = "bar"
-        }]
-      }]
-    },
- ]
 
   tags = {
     Environment = "Test"
   }
 }
+
+// Create Fixed Response Listener
+
+resource "aws_lb_listener_rule" "health_check" {
+  listener_arn = element(module.alb.http_tcp_listener_arns, 0)
+
+  action {
+    type = "fixed-response"
+    
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "This is an Error, I repeat!"
+      status_code  = "404"
+    }
+  }
+
+    condition {
+      path_pattern {
+        values = ["/error"]
+      }
+    }
+
+  # condition {
+  #   query_string {
+  #     key   = "health"
+  #     value = "check"
+  #   }
+
+  #   query_string {
+  #     value = "bar"
+  #   }
+  # }
+}
+
 
 // Create Instance Target group
 

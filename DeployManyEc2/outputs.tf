@@ -47,6 +47,10 @@ output "z-alb_security_group" {
   value = module.alb_security_group
 }
 
+output "z-arn-listener" {
+  value = module.alb
+}
+
 # output "instance_id_2" {
 #   description = "EC2 instance ID"
 #   value       =  "${module.ec2_instance.id[0]}"
