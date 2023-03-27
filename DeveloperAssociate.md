@@ -33,4 +33,7 @@ EOT
 ### enable crosszone loadbalancing 
 
 ## task 6
-### add listener to ALB, protocol -> HTTPS 443, defaults actions -> forward to target group (consisting of two instances), Security policy -> 
+### add listener to ALB, protocol -> HTTPS 443, defaults actions -> forward to target group (consisting of two instances), Security policy -> default policy?, default SSL/TLS certificate -> 
+
+## task 7
+### create an autoscaling group, create a launch template -> 

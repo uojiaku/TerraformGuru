@@ -477,6 +477,17 @@ module "alb" {
     }
   ]
 
+// ALB SSL Listener
+
+https_listeners = [
+    {
+      port               = 443
+      protocol           = "HTTPS"
+      certificate_arn    = module.acm.acm_certificate_arn
+      target_group_index = 1
+    },
+  ]
+
 
   tags = {
     Environment = "Test"
@@ -503,6 +514,27 @@ resource "aws_lb_listener_rule" "health_check" {
         values = ["/error"]
       }
     }
+
+// Create ACM for Certificate
+
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 4.0"
+
+  domain_name  = "my-domain.com"
+  zone_id      = "Z2ES7B9AZ6SHAE"
+
+  subject_alternative_names = [
+    "*.my-domain.com",
+    "app.sub.my-domain.com",
+  ]
+
+  wait_for_validation = true
+
+  tags = {
+    Name = "my-domain.com"
+  }
+}
 
   # condition {
   #   query_string {
