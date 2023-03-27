@@ -222,6 +222,8 @@ module "nlb" {
 
   vpc_id             = data.aws_vpc.default.id
   subnets            = element([data.aws_subnet_ids.example.ids], 0)
+  // enabled cross zone load balancing
+  enable_cross_zone_load_balancing = true
 
 
   target_groups = [
