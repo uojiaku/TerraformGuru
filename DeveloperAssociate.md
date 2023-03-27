@@ -24,7 +24,7 @@ EOT
 ### add the listener rule to the ALB /error rule that retuens a 404 with a response message "this is error"
 
 ## task 3
-### create a network load balancer (NLB), internet-facing scheme, ip address type: ipv4, network mapping (map to us-east-1a, us-east-1b, us-east-1c, us-east-1d. us-east-1e. us-east-1f), route the traffic from tcp port 80 to a target group, create a target group: target type = instances, health check protocol = http, health check path = /, advanced health check settings -> healthy threshold = 2, timeout = 2 seconds, interval = 5
+### create a network load balancer (NLB), internet-facing scheme, ip address type: ipv4, network mapping (map to us-east-1a, us-east-1b, us-east-1c, us-east-1d. us-east-1e. us-east-1f), route the traffic from tcp port 80 to a target group, (create a target group: target type = instances, health check protocol = http, health check path = /, advanced health check settings -> healthy threshold = 2, timeout = 2 seconds, interval = 5, status code 200 or 200-399)
 
 ## task 4 
 ### edit the attributes of a target group, create sticky session -> stickiness, stickiness type = load balancer generated cookie, stickiness duration = 1 day
