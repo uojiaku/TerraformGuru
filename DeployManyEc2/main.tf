@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  name   = "onuogugu"
+  name   = "oganiru"
   region = "us-east-1"
 
   user_data = <<EOT
@@ -445,6 +445,12 @@ module "alb" {
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "instance"
+      // added stickiness
+      stickiness = {
+        type = "lb_cookie" // or app_cookie
+        enabled = true
+        duration = 604800
+      }
       targets = {
         first_target = {
           target_id = aws_instance.first_instance.id

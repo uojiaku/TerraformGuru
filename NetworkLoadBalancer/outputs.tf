@@ -15,22 +15,22 @@ output "my-subnet" {
 
 output "first_instance" {
   description = "first instance"
-  value       = aws_instance.first_instance
+  value       = aws_instance.first_instance_2
 }
 
 output "second_instance" {
   description = "second instance"
-  value       = aws_instance.second_instance.id
+  value       = aws_instance.second_instance_2.id
 }
 
 output "third_instance" {
   description = "third instance"
-  value       = aws_instance.third_instance.id
+  value       = aws_instance.third_instance_2.id
 }
 
 output "az_output" {
   description = "third instance"
-  value       = aws_instance.first_instance.subnet_id
+  value       = aws_instance.first_instance_2.subnet_id
 
 }
 

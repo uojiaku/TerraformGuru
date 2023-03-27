@@ -29,12 +29,12 @@ locals {
 ############################ EC2 Instances #####################################
 ################################################################################
 
-resource "aws_instance" "first_instance" {
+resource "aws_instance" "first_instance_2" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 0)
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.instance_security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group_2.security_group_id]
   key_name               = "tf-key-pair-2"
 
   user_data_base64            = base64encode(var.user_data)
@@ -51,12 +51,12 @@ resource "aws_instance" "first_instance" {
 
 ########################## EC2 instance 2 #####################################
 
-resource "aws_instance" "second_instance" {
+resource "aws_instance" "second_instance_2" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 1) 
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.instance_security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group_2.security_group_id]
   key_name               = "tf-key-pair-2"
 
   user_data_base64            = base64encode(var.user_data)
@@ -72,12 +72,12 @@ resource "aws_instance" "second_instance" {
 
 ########################## EC2 instance 3 #####################################
 
-resource "aws_instance" "third_instance" {
+resource "aws_instance" "third_instance_2" {
   ami                    = data.aws_ami.amazon-linux-2.id
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 2) 
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.instance_security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group_2.security_group_id]
   key_name               = "tf-key-pair-2"
 
   user_data_base64            = base64encode(var.user_data)
@@ -124,11 +124,11 @@ data "aws_ami" "amazon-linux-2" {
 
 #################################################################
 ################# Instances Security Group ######################
-module "instance_security_group" {
+module "instance_security_group_2" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
-  name        = "instance-security-group"
+  name        = "instance-security-group-2"
   description = "Security group for instances!!!"
   # vpc_id      = module.vpc.vpc_id
 
@@ -239,15 +239,15 @@ module "nlb" {
     }
       targets = {
         first_target = {
-          target_id = aws_instance.first_instance.id
+          target_id = aws_instance.first_instance_2.id
           port = 80
         }
         second_target = {
-          target_id = aws_instance.second_instance.id
+          target_id = aws_instance.second_instance_2.id
           port = 80
         }
         third_target = {
-          target_id = aws_instance.third_instance.id
+          target_id = aws_instance.third_instance_2.id
           port = 80
         }
       }
