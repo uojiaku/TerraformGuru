@@ -29,7 +29,7 @@ EOT
 ## task 4 
 ### edit the attributes of a target group, create sticky session -> stickiness, stickiness type = load balancer generated cookie, stickiness duration = 1 day
 
-## task 5
+## task 5 
 ### enable crosszone loadbalancing 
 
 ## task 6
@@ -37,3 +37,15 @@ EOT
 
 ## task 7
 ### create an autoscaling group, create a launch template -> 
+
+## task 8
+### create scaling policies, policy type -> target tracking scaling -> metric type: average CPU utilization with target value: 40, autoscaling group: desired capacity: 1, minimum capacity: 1, maximum capacity: 3
+
+## task 9
+### create Amazon RDS, database creation method -> standard create, engine options -> MySQL version MySQL 8.0.28, templates -> Free tier, Availability and durability -> Single DB instance, credentials settings -> master username: admin - master password: 12345, instance configuration -> burstable classes: db.t2.micro, storage -> gp2 10GB - storage autoscaling: enabled - maximum storage threshold: 1000, connectivity -> don't connect to an EC2 compute resource - db subnet group: default - public access: yes - database port: 3306, database authentication -> password authentication, monitoring: disabled, Database options -> initial database name: mydb, backup -> enable automated backups - backup retention period: 7 days - backup window: no preference, Log exports -> no logs, Maintenance -> enable auto minor version upgrade, Deletion protection -> enable deletion protection
+
+## task 10
+### create RDS Aurora
+
+## task 11
+###

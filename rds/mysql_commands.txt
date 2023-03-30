@@ -1,0 +1,9 @@
+
+show DATABASES;
+use eligwedb;
+show tables;
+CREATE TABLE mytable (name VARCHAR(20), first_name VARCHAR(29));
+SHOW TABLES;
+SELECT * FROM mytable LIMIT 1000
+INSERT into mytable (`name`, `first_name`) values ("onuoha", "emeka");
+SELECT * FROM mytable LIMIT 1000
