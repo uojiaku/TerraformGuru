@@ -20,7 +20,8 @@
 #### Create the plan that terraform will execute with main.tf or output a deployment plan
 * terraform plan or terraform plan -out <nameofplan>
 #### Apply the terraform plan 
-* terraform apply
+* terraform apply -auto-approve
+* terraform output -json | jq 
 
 ### Configuration Language Video:
 

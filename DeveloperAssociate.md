@@ -47,5 +47,5 @@ EOT
 ## task 10
 ### create RDS Aurora
 
-## task 11
-###
+## task 11 redis - good for HA, memcached good for sharding
+### ElasticCache, create redis cluster, cluster mode: disabled, location: AWS cloud, Multi-AZ: disabled, Auto-failover: disabled, engine version: 6.2, port 6379, parameter groups: default.redis6.x, node type: cache.t2.micro, number of replicas: 0, maintenance -> auto upgrade minor verions: enable
