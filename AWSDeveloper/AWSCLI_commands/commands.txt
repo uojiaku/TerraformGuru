@@ -1,0 +1,15 @@
+## run with user that doesn't have run-instances permissions to get the error message
+aws ec2 run-instances --dry-run --image-id ami-04581fbf744a7d11f --instance-type t2.micro
+
+
+## useful for decode error messages on awscli
+aws sts decode-authorization-message --encoded-message extWU9O7ERL2tHhRWv1FsAMGb7j3oLCdB_J-SnLcASW51jBfCxABhct75TFo1uI8KYBulTHzJpPzBKWK_URL_Ta9QP8VJoarPqwD4nEdUOkofgz3BMUvKi6ejvH2gZqCBmBIPkW9nk-EqdmCDeICEs_7BadF4KktZ8SOf0v1qAlvtlBSVBMs3waWjbQuAkFm4uAE_1igedWeB3oH2z2UEA2C4lHfIiCEjMnxel4opz_JNX5IWtxdyHzqnyOpUNVasvxC4-TqPiZ3cesiLhueTOA7nSS2DKRW55JOCpEphQvi96R3rRC-ynmpP3UOWnSstOc50vTLPgfRgPf3ParP3qWAgCq-YCQxpT74OC68bv6zflJDrRWgyUQCcSB68dkMN1R37AyQzPMCbzflMZfjv6D1BHbXRFgzuByNodl5EzKjAjYvdgMJupzgs9EIuZSb2I28SfcQcuKttNoqpOnohpQxxYBtLbv9alkxWvnxI93VxaocDiA8gDnPjMlJuAH82sZy6DMTKsQDj-PeIpcdD5X2W3qSEQA37QIQLdaBr6-QXsH5e4rqFYBxReQxeMfmktOYQH4ky1iq3iP27Zietd4xZrvMXqDv1J6QL9uzm7yQcVyJ6jdvbjXfoNZtsIHb_mlW9783SuOc6iTfFw64kdrNVFM
+
+## in an ec2 instance, retrieve the metadata:
+curl http://169.254.169.254/latest/metadata/
+
+## aws config file needs [profile <name>] while aws credentials file only need [<name>]
+
+aws sts get-session-token --serial-number <arn of assigned MFA device> --token-code <code from MFA device>
+
+## above command gives you an access id, access key, and a session token. In your credentials you'll add the access id and access token along with the aws_session_token

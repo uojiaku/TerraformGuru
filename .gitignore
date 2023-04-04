@@ -1,5 +1,6 @@
 .terraform
 **/DeployManyEc2/tf-key-pair
+**/ApplicationLoadBalancer/tf-key-pair
 **/NetworkLoadBalancer/tf-key-pair-2
 **/ec2/tf-key-pair-3
 
