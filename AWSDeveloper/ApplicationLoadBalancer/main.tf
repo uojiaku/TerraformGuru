@@ -6,15 +6,25 @@ locals {
   name   = "oganiru"
   region = "us-east-1"
 
+  # user_data = <<EOT
+  # #!/bin/bash
+  # # Use this for your user data (script from top to bottom)
+  # # install httpd (Linux 2 version)
+  # yum update -y
+  # yum install -y httpd
+  # systemctl start httpd
+  # systemctl enable httpd
+  # echo "<h1>Hello world from $(hostname -f) </h1>" > /var/www/html/index.html
+  # EOT
+
   user_data = <<EOT
   #!/bin/bash
-  # Use this for your user data (script from top to bottom)
-  # install httpd (Linux 2 version)
   yum update -y
   yum install -y httpd
   systemctl start httpd
   systemctl enable httpd
-  echo "<h1>Hello world from $(hostname -f) </h1>" > /var/www/html/index.html
+  EC2_AVAIL_ZONE=$(curl -s https://169.254.169.254/latest/meta-data/placement/availability-zone)
+  echo "<h1>Hello World from $(hostname -f) in AZ $EC2_AVAIL_ZONE </h1> > /var/www/html/index/html
   EOT
 
   tags = {
@@ -144,7 +154,7 @@ resource "aws_instance" "first_instance" {
   instance_type          = var.instance_type
   availability_zone      = element(local.production_availability_zones, 0)
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = [module.instance_security_group.security_group_id]
+  vpc_security_group_ids = [module.instance_security_group_1.security_group_id]
   key_name               = "tf-key-pair"
 
   user_data_base64            = base64encode(var.user_data)
@@ -309,6 +319,34 @@ resource "aws_security_group_rule" "outbound_http" {
   source_security_group_id =  module.instance_security_group.security_group_id
 
   security_group_id = module.alb_security_group.security_group_id
+}
+
+#################################################################
+######### Instances Security Group (instance 1) #################
+module "instance_security_group_1" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4.0"
+
+  name        = "instance-security-group-1"
+  description = "Security group for instances!!!"
+  # vpc_id      = module.vpc.vpc_id
+
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  # ingress_rules       = ["ssh-tcp", "all-icmp"]
+  ingress_rules       = ["http-80-tcp", "ssh-tcp", "all-icmp"] // old
+  # egress_rules        = ["all-all"]
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      description = "Open internet I think"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
+  tags = local.tags
 }
 
 #################################################################
@@ -479,21 +517,21 @@ module "alb" {
 
 // ALB SSL Listener
 
-https_listeners = [
-    {
-      port               = 443
-      protocol           = "HTTPS"
-      certificate_arn    = module.acm.acm_certificate_arn
-      target_group_index = 1
-    },
-  ]
+# https_listeners = [
+#     {
+#       port               = 443
+#       protocol           = "HTTPS"
+#       certificate_arn    = module.acm.acm_certificate_arn
+#       target_group_index = 1
+#     },
+#   ]
 
 
-  tags = {
-    Environment = "Test"
-  }
+#   tags = {
+#     Environment = "Test"
+#   }
+# }
 }
-
 // Create Fixed Response Listener
 
 resource "aws_lb_listener_rule" "health_check" {
@@ -517,24 +555,24 @@ resource "aws_lb_listener_rule" "health_check" {
 
 // Create ACM for Certificate
 
-module "acm" {
-  source  = "terraform-aws-modules/acm/aws"
-  version = "~> 4.0"
+# module "acm" {
+#   source  = "terraform-aws-modules/acm/aws"
+#   version = "~> 4.0"
 
-  domain_name  = "my-domain.com"
-  zone_id      = "Z2ES7B9AZ6SHAE"
+#   domain_name  = "my-domain.com"
+#   zone_id      = "Z2ES7B9AZ6SHAE"
 
-  subject_alternative_names = [
-    "*.my-domain.com",
-    "app.sub.my-domain.com",
-  ]
+#   subject_alternative_names = [
+#     "*.my-domain.com",
+#     "app.sub.my-domain.com",
+#   ]
 
-  wait_for_validation = true
+#   wait_for_validation = true
 
-  tags = {
-    Name = "my-domain.com"
-  }
-}
+#   tags = {
+#     Name = "my-domain.com"
+#   }
+# }
 
   # condition {
   #   query_string {

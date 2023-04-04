@@ -49,3 +49,13 @@ EOT
 
 ## task 11 redis - good for HA, memcached good for sharding
 ### ElasticCache, create redis cluster, cluster mode: disabled, location: AWS cloud, Multi-AZ: disabled, Auto-failover: disabled, engine version: 6.2, port 6379, parameter groups: default.redis6.x, node type: cache.t2.micro, number of replicas: 0, maintenance -> auto upgrade minor verions: enable
+
+## task 12 Create Route53 A Record
+
+## task 13 Create Route53 Policies - simple, weighted, latency ; Create Route53 health check
+
+## task 14 - Create s3 bucket, create s3 bucket policy
+
+## task 15 - create s3 website with versioning
+
+## task 16 - create s3 replication, add lifecycle rule
