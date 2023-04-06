@@ -160,7 +160,9 @@ module "s3_bucket2" {
           storage_class = "GLACIER"
         }
       ]
-    }
+   
+    },
+    
   ]
 }
 # Create IAM Role for S3 to replicate objects
