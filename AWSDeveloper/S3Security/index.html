@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Intro:</title>
+    </head>
+<body>
+    <h1>I love bears</h1>
+    <p> Kedu Uwa! </p>
+</body>
+    <img src="bear.png" width=500 />
+
+<!-- CORS Demo -->
+<div id="tofetch"></div>
+<script>
+    var tofetch = document.getElementById("tofetch");
+    fetch('http://goat777.s3-website-us-east-1.amazonaws.com/extra-page.html')
+    .then((response) => {
+        return response.text();
+    })
+    .then((html) => {
+        tofetch.innerHTML = html
+    })
+</script>
+
+
+</html>
