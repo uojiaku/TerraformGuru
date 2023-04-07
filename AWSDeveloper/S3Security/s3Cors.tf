@@ -31,6 +31,12 @@ module "s3_bucket6" {
     error_document = "error.html"
     
   }
+
+  logging = {
+    bucket = module.s3_bucket6.s3_bucket_id
+    target_bucket = module.s3_bucket7.s3_bucket_id
+    target_prefix = "log/"
+  }
 }
 
 ########### Supporting Resources ##########

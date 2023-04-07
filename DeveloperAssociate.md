@@ -59,3 +59,9 @@ EOT
 ## task 15 - create s3 website with versioning
 
 ## task 16 - create s3 replication, add lifecycle rule
+
+## task 17 - create s3 event notification
+
+## task 18 - create S3 Cors Rule
+
+## task 19 - create s3 access log
