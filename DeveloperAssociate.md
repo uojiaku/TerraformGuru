@@ -64,4 +64,10 @@ EOT
 
 ## task 18 - create S3 Cors Rule
 
-## task 19 - create s3 access log
+## task 19 - create s3 access log (found in s3Cors.tf)
+
+## task 20 - create MFA delete
+
+## task 21 - create cloudfront distribution and origin access control
+
+## task 22 - create caching and caching invalidation
