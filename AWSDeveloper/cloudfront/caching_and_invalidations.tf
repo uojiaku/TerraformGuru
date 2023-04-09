@@ -24,6 +24,10 @@ resource "aws_cloudfront_distribution" "this2" {
         forward = "none"
       }
     }
+
+    trusted_key_groups = [resource.aws_cloudfront_key_group.this.id]
+    
+  
   }
 // cache invalidation
 
@@ -76,6 +80,8 @@ resource "aws_cloudfront_origin_access_control" "this2" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 } 
+
+
 
 ## Run these commands too
 ## aws s3 cp index.html s3://goat999

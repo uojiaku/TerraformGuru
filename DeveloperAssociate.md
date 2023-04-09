@@ -71,3 +71,5 @@ EOT
 ## task 21 - create cloudfront distribution and origin access control
 
 ## task 22 - create caching and caching invalidation
+
+## task 23 - create public key and keygroup for cloudfront distribution
