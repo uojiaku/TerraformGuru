@@ -73,3 +73,5 @@ EOT
 ## task 22 - create caching and caching invalidation
 
 ## task 23 - create public key and keygroup for cloudfront distribution
+
+## task 24 - create two ECS clusters; one with fargate provider and another with EC2 autoscaling group
