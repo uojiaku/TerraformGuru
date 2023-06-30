@@ -4,6 +4,8 @@
 **/NetworkLoadBalancer/tf-key-pair-2
 **/ec2/tf-key-pair-3
 *.terraform/*
+*tf-key-pair
+*tf-key-pair*
 
 # Local .terraform directories
 **/eks-setup/.terraform/*
