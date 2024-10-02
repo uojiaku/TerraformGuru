@@ -1,0 +1,2 @@
+# IAM Role
+A big advantage of using IAM roles is that access keys that are used to get access to the S3 bucket are constantly rotated behind the scenes by AWS. In contrast, if you grant a particular principle access to the S3 bucket using a bucket policy, your S3 objects could be left vulnerable if they happen to leak their access keys.
