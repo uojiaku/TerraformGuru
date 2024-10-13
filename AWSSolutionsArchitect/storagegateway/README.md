@@ -7,6 +7,7 @@
 
 ## Different Modes
 | different modes | old name | new name | interface | function |
+|:---------------:|:--------------------:|:------------------:|:------------:| :----------------------------------------------------------------:|
 | 1               | n/a (not applicable)| File gateway | NFS, SMB | allow on-prem or EC2 instances to store objects in S3 via NFS or SMB mount point |
 | 2               | gateway-stored volumes | volume gateway stored mode | iSCSI | async replication of on-prem data to S3 |
 | 3               | gateway-cached volumes | volume gateway stored mode | iSCSI | async replication of on-prem data to S3 |
