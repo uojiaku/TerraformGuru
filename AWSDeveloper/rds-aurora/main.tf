@@ -1,5 +1,8 @@
 provider "aws" {
-  region = "us-east-1"
+  profile                 = "awsgoat"
+  region                  = "us-east-1"
+  shared_credentials_files = ["/Users/ucheojiaku/.aws/credentials"]
+
 }
 
 module "aurora" {

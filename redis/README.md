@@ -1,4 +1,8 @@
-# Redis
+# Redis (Remote Dictionary Server) -> an open source, in-memory database that stores and serves data quickly. Perfect for applications that require low latency.
+
+1. can be used as cache to store short-term and volatile data (useful for session management, semantic cache, session store, and volatile session store)
+2. can be used as a database to store durable and consistent data (useful for document store, feature store, leaderboards, durable session store, reliable cache)
+3. can be used for vector search to manage and manipulate vector data. (useful for GenAI knowledge base, recommendation system, and visual search)
 
 ## can handle  
    * complex data types: sorted sets, hashes, bitmaps, etc

@@ -12,7 +12,7 @@ terraform {
 provider "aws" {
   profile                 = "default"
   region                  = "us-east-1"
-  shared_credentials_file = "/c/Users/ucheo/.aws/credentials"
+  shared_credentials_file = "/Users/ucheojiaku/.aws/credentials"
 
 }
 

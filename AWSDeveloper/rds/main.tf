@@ -1,5 +1,7 @@
 provider "aws" {
-  region = "us-east-1"
+  profile                 = "awsgoat"
+  region                  = "us-east-1"
+  shared_credentials_files = ["/Users/ucheojiaku/.aws/credentials"]
 }
 
 
@@ -9,8 +11,8 @@ module "ohuru_db" {
   identifier = "eligwedb"
 
   engine               = "mysql"
-  engine_version       = "8.0.28"
-  instance_class       = "db.t2.micro"
+  engine_version       = "8.0.39"
+  instance_class       = "db.t4g.micro"
   family               = "mysql8.0"
   major_engine_version = "8.0"
 
@@ -43,7 +45,7 @@ module "ohuru_db" {
 
   # DB subnet group
   create_db_subnet_group = true
-  subnet_ids             = element([data.aws_subnet_ids.example.ids], 0)
+  subnet_ids             = element([data.aws_subnets.example.ids], 0)
 
 }
 
@@ -54,8 +56,8 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_subnet_ids" "example" {
-  vpc_id = data.aws_vpc.default.id
+data "aws_subnets" "example" {
+  # vpc_id = data.aws_vpc.default.id
 }
 
 ################################################################

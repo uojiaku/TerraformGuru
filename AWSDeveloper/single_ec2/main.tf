@@ -1,5 +1,8 @@
 provider "aws" {
-  region = local.region
+  profile                 = "awsgoat"
+  region                  = "us-east-1"
+  shared_credentials_file = "/Users/ucheojiaku/.aws/credentials"
+
 }
 
 locals {
@@ -31,7 +34,7 @@ locals {
 
 resource "aws_instance" "gpu" {
   ami                    = data.aws_ami.amazon-linux-2.id
-  instance_type          = var.instance_type
+  instance_type          = "t2.micro"
   availability_zone      = element(local.production_availability_zones, 0)
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [module.instance_security_group.security_group_id]
@@ -73,7 +76,8 @@ data "aws_ami" "amazon_linux" {
 
   filter {
     name   = "name"
-    values = ["amzn-ami-hvm-*-x86_64-gp2"]
+    # values = ["amzn-ami-hvm-*-x86_64-gp2"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 }
 
@@ -94,13 +98,13 @@ data "aws_ami" "amazon-linux-2" {
  }
 }
 
-# RHEL 8.5
-data "aws_ami" "rhel_8_5" {
+# RHEL 9
+data "aws_ami" "rhel_9" {
   most_recent = true
   owners = ["309956199498"] // Red Hat's Account ID
   filter {
     name   = "name"
-    values = ["RHEL-8.5*"]
+    values = ["RHEL-9*"]
   }
   filter {
     name   = "architecture"
