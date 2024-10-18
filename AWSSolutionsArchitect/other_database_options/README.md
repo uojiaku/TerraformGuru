@@ -3,9 +3,13 @@ https://aws.amazon.com/opensearch-service/
 https://aws.amazon.com/blogs/aws/announcing-amazon-opensearch-service-which-supports-opensearch-10/
 
 ## Amazon Athena 
-A SQL engine that has been overlaid on S3 using Presto. Designed to query raw query sitting inside S3 bucket
+A SQL engine that has been overlaid on S3 using Presto. Designed to query raw query sitting inside S3 bucket. An easy way to analyze data in Amazon S3 using standard SQL.
 - Use or convert data to Parquet format if possible for a big performance jump when querying data
-- Similar in concept to Redshift Spectrum but both have different use cases:
+- Similar in concept to Redshift Spectrum but both have different 
+- Provides basic SQL querying capabilities. It does not support complex joins or advanced analytics functions typically found in traditional relational databases or data warehouses.
+- Amazon Athena support these data formats: Apache Parquet, Apache ORC, JSON, etc. Athena does not support XML
+
+use cases:
 
 | Use Amazon Athena | use Reshift Spectrum |
 |:-------------------------------------------------------:|:--------------------------------------------------------:|

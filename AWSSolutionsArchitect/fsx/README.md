@@ -35,6 +35,7 @@ If we have an auto scaling group of EC2 instances(3), they would be considered t
 ![alt text](fsx-lustre.png)
 - All the drives backing the data in this file system are solid state drives, because of this they can arrange it so that the most frequently accessed data is the data that can be accessed the fastest.
 - Also leverages S3 to store snapshots and as sort of a cold storage for the least frequently accessed files in the system
+- Provides parallel storage for files bing processed by HPC clusters
 
 ### Summary
 1. FSx covers several file share use cases -> most commonly used for windows file server file shares, FSx can also be used for ONTAP, OpenZFS, and Lustre with deep AWS integration.

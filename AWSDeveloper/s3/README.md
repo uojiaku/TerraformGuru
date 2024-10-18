@@ -69,3 +69,5 @@ S3 objects' path looks like a file path but it is really key. Because S3 has mor
 - In this diagram how can the EC2 instance send/receive objects from the S3 bucket?
   1. One way is to use IGW(Internet gateway) which leads to the public internet which leads to the S3 bucket. However ingress and egress via an Internet gateway can get expensive so..
   2. S3 gateway endpoint(Elastic Network Interface) ENI -> allows you to traverse AWS's private internet instead of the public internet. Transferring data costs and latency can be lower. An appropriate route in the route table must be set in the VPC
+
+  - A presigned URL uses security credentials to grant time-limited permission to acces private objects in S3 buckets. You don't need to create an application or a policy to use a presigned URL.

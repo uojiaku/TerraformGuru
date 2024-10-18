@@ -21,6 +21,8 @@
    new name: volume gateway stored mode
    interface: iSCSI
    function: async replication of on-prem data to S3 (all your data is stored in your data center, but behind the scenes there's a job that's running and syncing that out to S3)
+   - Stored volumes provide low-latency access to entire datasets, where on-premises gateways are configured to store all data locally. Point-in-time snapshots from the local data are taken asynchronously to Amazon S3. This configuration provides durable and inexpensive offsite backups that can be recovered to local data centers or Amazon EC2. 
+   Reference: Volume Gateway (https://docs.aws.amazon.com/storagegateway/latest/vgw/WhatIsStorageGateway.html#volume-gateway)
 3. old name: gateway-cached volumes
    new name: volume gateway cached mode
    interface: iSCSI
