@@ -34,3 +34,7 @@ Use case is that we don't have to store sensitive data in plain text in our appl
    - In order to retrieve a secret from Secrets Manager, your application must be given access to the specific secret, either through a resource-based policy or an identity-based policy
 2. Retrieve with AWS SDK
    - Even though the code to retrieve a secret is static, encryption keys and access keys are being rotated by Secrets Manager and IAM, respectively, behind the scenes.
+
+## Summary
+1. Secrets manager leverages Lambda to automatically rotate KMS keys. this helps keeps secrets encrypted at rest and in transit.
+2. Using resource- or identity-based policies grant access to applications and services. No need to make application changes when keys rotate.
