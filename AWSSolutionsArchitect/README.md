@@ -1,5 +1,7 @@
+## Data Stores
 ![alt text](challenge2.png)
 
+## Networking
 ![alt text](networking_challenge1.png)
 Above, enhanced peering mode doesn't exist
 
@@ -16,4 +18,21 @@ Above, failover policy doesn't help with distributing load. latency policy wont 
 
 4. A network load balancer with an EIP (Elastic IP) will allow our AWS application to leverage static IP addresses that can be allowlisted by the customer firewall. Network load balancers support static IP addresses; you can also assign one elastic IP address per subnet enabled for the load balancer. https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html
 
-5. 
+## Security
+
+https://docs.aws.amazon.com/pdfs/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.pdf#organizing-your-aws-environment
+
+![alt text](security_challenge1.png)
+Above, 
+- a publishing account allows you to leverage your IT organization as a shared service to provide standardization
+- if you want to keep regulatory and compliance requirements localized as much as possible, there is generally a very strong logging component.
+- compliance account structure does not exist
+
+
+![alt text](security_challenge1b.png)
+Above,
+ is how it might look in practice, we have consolidated security, the root account (holding company that serves as the shared service)
+ - we created a logging account and attached it to each one of the business units.
+
+![alt text](security_challenge1b.png)
+
