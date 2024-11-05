@@ -20,8 +20,8 @@ Throughput -> Measure of how much data can be moved at one time. Think of a uhau
 ## Consistency Models (ACID/BASE)
 ### ACID
 |                 |                      |
-| ACID -> Atomic, Consistent, Isolated, Durable |
 |:-----------------:|:---------------------------------:|
+| ACID -> Atomic, Consistent, Isolated, Durable |
 | Atomic | Transactions are "all or nothing" |
 | Consistent | Transactions must be valid |
 | Isolated | Transactions can't mess with one another |
@@ -30,8 +30,8 @@ Throughput -> Measure of how much data can be moved at one time. Think of a uhau
 A half-transaction can't get written to the database. ACID models dont scale very well. As relational databases with ACID have row locking and contention to slow down the database
 ### BASE
 |                             |                               |
-| BASE -> Base Availability, Soft-state, Eventual Consistency |
 |:-----------------:|:---------------------------------------:|
+| BASE -> Base Availability, Soft-state, Eventual Consistency |
 | Base Availability | values availability even if stale |
 | Soft-state | might not be instantly consistent across stores |
 | Eventual Consistency | will achieve consistency at some point |
