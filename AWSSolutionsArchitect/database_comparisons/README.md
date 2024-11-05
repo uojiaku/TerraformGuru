@@ -1,6 +1,6 @@
 # Database Comparisons
 
-| Amazon Database Options |
+| Amazon Database Options |  |
 |:----------------------------:|:-------------------------------------------------------------------------------------------------:|
 | Database on EC2 | - ultimate control over database. - if your preferred DB is not available under RDS |
 | Amazon RDS | - need traditional relational database for OTLP (online transactional processing). - you data is well-formed and structured |
