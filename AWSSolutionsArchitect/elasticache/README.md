@@ -3,6 +3,7 @@ Fully managed implementations of two popular in-memory data stores (Redis and me
 - Push-button scalability for memory, writes and reads
 - In memory key/value store-not persistent in the traditional sense.. so they are really fast because they are not tied to disk I/O, elasticache is rather than DynamoDB. The trade-off is persistence. If you using redis, you have the option to backup and restore and there are some ways to create persistent data. But never think of Redis as a persistent data store like DynamoDB or RDS.
 - Elasticache is billed by node size and hours of use
+- Elasticache for Memcached does not offer native encryption of data at rest. For a managed caching solution with encryption at rest, we can use Elasticache for Redis.
 
 ## Use Cases
 | Use | Benefit |

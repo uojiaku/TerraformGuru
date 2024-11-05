@@ -41,3 +41,22 @@ B. It's event driven, and possible within the bounds of the situation that they'
 C.migrating these instances/services isn't going to help us
 D. We dont want to close ports we might need, security groups dont have deny rules
 G. Cognito has user pools that keeps up with user accounts, IAM has its users that are its own thing and they dont overlap. Cognito's users are separate from IAM users
+
+- Quiz questions/answers:
+1. IAM identity Center SSO provides centralized, easy-to-manage solution for granting and revoking access to AWS accounts and services
+2. A Service control policy that denies all actions for root users and attaching it to the root OU. you will effectively prevent root users from taking any actions in all accounts within the organization
+3. AWS Shield Advanced provides managed DDoS protection for your applications with minimal operational overhead. It integrates with AWS WAF, using application-aware managed rules to detect and mitigate layer 7 DDoS attacks
+4. most efficient way of logging all user activity and actions taken on AWS services for your AWS multi-region single account?
+    - configure CloudTrail to deliver log files from multiple regions to a single S3 bucket for a single account (see Receiving CloudTrail Log files from Multiple Regions)
+6. NACLs are stateless so they do not maintain connection information. Security groups are stateful so they maintain connection information.
+8. Control certain areas of IT environment governed by AWS organizations that can only use certain regions? 
+    - ACLs and resource-based policies apply to assets and not users or groups. Identity-based policies using the aws:RequestedRegion condition key could work but since we are trying to control at the OU level. an SCP would require less management and localized care. We can use a DENY with StringNotEqualsIfExists conditional against aws:RequestedRegion for allowed Regions
+9. IDS is a monitoring system, IPS is a control system. IDS doesnt alter the network packets in any way, whereas the IPS prevents the packet from delivery based on the contents of the packet, much like how a firewall prevents traffic by IP address
+11. A security audit failed because username and passwords were hard-coded in a script that runs on an EC2 instance, what's the remediation? 
+    - AWS KMS can be used for storing and accessing keys to be used by applications. we access keys in a dynamic way w/o hard-coding them and access by provisioning with an IAM role when used by an EC2 instance.
+    - AWS KMS is not as suitable for individual passwords because along with the need for the password to remain secret, the usernames themselves are treated as sensitive information
+    - Storing on S3 gives more secure multi-layer control over AWS KMS. Secrets manager or system manager parameter store with an IAM role would be the most optimal choice.
+    - Storing credentials in an encryoted file on S3 while creating an IAM role with access assigning it to the EC2 instance. We also need to make sure the KMS key policy allows the IAM role to decrypt the S3 object.
+12. mobile app with secure access to AWS resources. How?
+       - use cognito SDK to provide temporary credentials. a secure token service and web identity federation using AssumeRoleWithIdentity is possible but it isn't what AWS recommends.
+13. OAuth 2.0? focuses on authorization, allowing clients to access resources on behalf of a resource owner, usually through issuing tokens to clients for specific scopes.
