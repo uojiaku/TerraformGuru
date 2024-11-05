@@ -34,5 +34,10 @@ Above,
  is how it might look in practice, we have consolidated security, the root account (holding company that serves as the shared service)
  - we created a logging account and attached it to each one of the business units.
 
-![alt text](security_challenge1b.png)
-
+![alt text](security_challenge2.png)
+Above, 
+A. needs a lot of training data to train the model and it takes a lot of time.
+B. It's event driven, and possible within the bounds of the situation that they're facing
+C.migrating these instances/services isn't going to help us
+D. We dont want to close ports we might need, security groups dont have deny rules
+G. Cognito has user pools that keeps up with user accounts, IAM has its users that are its own thing and they dont overlap. Cognito's users are separate from IAM users
