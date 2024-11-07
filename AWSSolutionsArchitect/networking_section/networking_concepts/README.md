@@ -31,7 +31,7 @@ Also known as Dynamic ports
 - Essentially the web server preserves the session port for the client.
 
 ## TCP and UDP Traffic
-![alt text](ephemeral_ports_udp.png)
+![alt text](ephemeral_port_udp.png)
 UDP just sends sends sends. It is favored when streaming media because having to acknowledge every packet of data can become burdensome of the network, client and server.
 
 ## Reserved IP addresses
