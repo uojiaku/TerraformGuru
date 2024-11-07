@@ -21,7 +21,7 @@ Partition placement group -> use case: if I have a really large application that
 
 |    Three Placement Groups       |            |            |             |
 |                | Clustered | Spread | Partition |
-|:-------:|:-------------------:||:-----------------------:|:--------------------------:|
+|:-------:|:-------------------:|:-----------------------:|:--------------------------:|
 | What | Instances are placed into a low-latency group within a single AZ | Instances spread across underlying hardware | Instances are grouped into paritions and spread across racks |
 | When | Need low network latency and/or high network throughput | Reduce risk of simultaneous failure if underlying hardware fails | Reduce risk of correlated hardware failure for multi-instance workloads |
 | Pros | Get the most out of Enhanced Networking Instances | Can span multiple AZ's | Better for large distributed or replicated workloads than Spread |
