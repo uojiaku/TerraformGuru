@@ -20,7 +20,7 @@ https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar
 
 if question is about MySQL or PostgreSQL, we really want to choose Aurora over RDS because it has all the scalability and high availability features built in by design.
 ## Databases
-|Databases| 
+|Databases |        |                              |                                  |
 |:----------------:|:----------------------------:|:--------------------------------:| :-----------------: |
 | EC2 Database | Relational Data | | |
 | RDS | Relational Data | Low Operational Overhead | Mysql/PostgreSQL |
@@ -30,7 +30,7 @@ if question is about MySQL or PostgreSQL, we really want to choose Aurora over R
 | Neptune |   | | |
 
 ## File Storage
-| File Storage | 
+| File Storage |        |                       |                           |
 |:----------------:|:----------------------------:|:--------------------------------:|:-----------------:|
 | S3 | Share Files || |
 | EBS ||| |

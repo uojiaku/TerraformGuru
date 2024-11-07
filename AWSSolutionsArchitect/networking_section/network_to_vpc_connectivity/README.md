@@ -3,7 +3,7 @@ https://www.youtube.com/watch?v=uj7Ting6Ckk
 https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/network-to-amazon-vpc-connectivity-options.html
 
 
-| AWS Managed VPN |
+| AWS Managed VPN |   |
 |:--------------:|:------------------:|
 | What | AWS managed IPsec VPN connection over your existing internet |
 | When | Quick and usually simple way to establish a secure tunneled connection to a VPC; Redundant link for Direct Connect or to other VPC VPN |
@@ -18,7 +18,7 @@ https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/netw
 - useful if we want to have a redundant connection into AWS, but customer has to take care of the failover on their side of the network.
 
 ## AWS Direct Connect
-| Direct Connect |
+| Direct Connect |          |
 |:-------------------------:|:---------------------:|
 | What | Dedicated network conneciton over private lines straight into AWS backbone |
 | When | Require a "big pipe" into AWS; lots of resources and services being provided on AWS to your corporate users |
@@ -31,7 +31,7 @@ https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/netw
 Direct connection is a single connection from AWS router to Customer router, so it's not redundant. AWS recommends setting up a second connection, either a VPN connection or a second Direct Connect connection.
 
 ## Direct Connect Plus VPN 
-| Direct Connect Plus VPN |
+| Direct Connect Plus VPN |                                 |
 |:------------------------:|:--------------------------------:|
 | What | IPsec VPN connection over private lines |
 | When | Want added security of encrypted tunnel over Direct Connect |
@@ -42,7 +42,7 @@ Direct connection is a single connection from AWS router to Customer router, so 
 ## VPN CloudHub
 kinda like a do it yourself MPLS network using public internet and IPSec VPN. Here we'd use AWS's virtual private gateway as the hub.
 
-| VPN CloudHub |
+| VPN CloudHub |                                            |
 |:------------:|:----------------------------------------------:|
 | What | Connect locations in a Hub and Spoke manner using AWS's Virtual Private Gateway |
 | When | Link remote offices for backup or primary WAN access to AWS resources and each other |
@@ -54,7 +54,7 @@ kinda like a do it yourself MPLS network using public internet and IPSec VPN. He
 
 ## Software VPN
 kinda the ultimate do it yourself option for VPN
-| Software VPN |
+| Software VPN |                                            |
 |:--------------:|:---------------------------------------------:|
 | What | You provide your own VPN endpoint and software |
 | When | You must manage both ends of the VPN connection for compliance reasons or your want to use a VPN option not supported by AWS |
@@ -67,7 +67,7 @@ kinda the ultimate do it yourself option for VPN
 ## Transit VPC
 for geographic dispersed VPCs in locations all over the world and you want to create kind of common transit center, a common meeting place where all paths cross. At the heart of this option is where you have one VPC that's really just a pass through and its a good way to support a hybrid deployment across several different cloud providers
 
-| Transit VPC |
+| Transit VPC |                                                 |
 |:---------------:|:--------------------------------------------:|
 | What | Common strategy for connecting geographically disperse VPCs and locations in order to create a global network transit center |
 | When | Locations and VPC-deployed assets across multiple regions that need to communicate with one another |

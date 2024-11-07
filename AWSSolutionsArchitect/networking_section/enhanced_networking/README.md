@@ -19,8 +19,8 @@ Spread placement group -> we can put our instances on physically separate hardwa
 
 Partition placement group -> use case: if I have a really large application that consists of a lot of instances then I can group those different layers and different partitions and manage how those partitions are spread across different hardware.
 
-|| Three Placement Groups |
-|| Clustered | Spread | Partition |
+|    Three Placement Groups       |            |            |             |
+|                | Clustered | Spread | Partition |
 |:-------:|:-------------------:||:-----------------------:|:--------------------------:|
 | What | Instances are placed into a low-latency group within a single AZ | Instances spread across underlying hardware | Instances are grouped into paritions and spread across racks |
 | When | Need low network latency and/or high network throughput | Reduce risk of simultaneous failure if underlying hardware fails | Reduce risk of correlated hardware failure for multi-instance workloads |
