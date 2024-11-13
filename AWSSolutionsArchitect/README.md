@@ -60,3 +60,12 @@ G. Cognito has user pools that keeps up with user accounts, IAM has its users th
 12. mobile app with secure access to AWS resources. How?
        - use cognito SDK to provide temporary credentials. a secure token service and web identity federation using AssumeRoleWithIdentity is possible but it isn't what AWS recommends.
 13. OAuth 2.0? focuses on authorization, allowing clients to access resources on behalf of a resource owner, usually through issuing tokens to clients for specific scopes.
+
+## Migrations
+![alt text](migrations_challenge1.png)
+
+B. CAF does not call out the need to communicate the transition to those external stakeholders
+C. transitioning to the cloud opens up opportunities but it also surfaces some new risks 
+D. we need to know how we are going to measure the success of the migration to the cloud
+E. some of our software licenses may prohibit us from running in a multi-tenant environment. we need to be sure if our existing software can be migrated to the cloud
+F. a lot of companies move from CapEx to OpEx expense model but it doesn't mean they should reconsider accounting structures

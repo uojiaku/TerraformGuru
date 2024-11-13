@@ -5,3 +5,4 @@
 - Adapt the Cloud Adoption Framework for your own organization's culture
 - leverage the CAF to get buy-in by acknowledging the enterprise nature of cloud migrations
 - be a boundary spanner
+
