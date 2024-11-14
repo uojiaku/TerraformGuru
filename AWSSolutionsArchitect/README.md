@@ -78,3 +78,14 @@ C. this is a lift and shift and we wouldn't achieve any sort of longterm benefit
 D. answer is D because we can move to a managed database scenario
 E. RDS doesn't support Sybase, so we cant just restore a Sybase 
 database backup to RDS because its not a supported database
+
+- Quiz questions/answers:
+1. Sun Solaris is not a support OS for AWS
+3. which combo will allow us to perform a heterogeneous migration from an on-prem Oracle database to an Aurora MySQL database? AWS DMS & AWS SCT.
+    - AWS DMS supports both homogeneous and heterogeneous migrations, making it suitable for migrating data from an on-prem Oracle database to an Amazon Aurora MySQL database. AWS SCT helps convert the source database schema to a compatible schema for the target database which is required for a heterogenous migration.
+4. AWS Transfer for SFTP securely shares files with a 3rd party
+5. AWS Replication Agent must be installed on source servers when migrating an application using AWS Application Migration Service. It enables communication between the source servers and the application migration service.
+7. SCT and DMS do not support Informix as a source database. In order to migrate a Informix database to Aurora we have to manually create the schema and use Data Pipeline with JDBC to move the data.
+8. Difference between DataSync and Storage Gateway is that DataSync focuses on transferring data between on-prem storage systems and AWS, whereas AWS storage gateway provides a hybrid cloud storage solution that enables on-prem applications to seamlessly use AWS cloud storage
+9. Retiring an asset is the least-cost option
+10. Homogeneous migration is when we migrate between the same type of databases.
