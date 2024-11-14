@@ -69,3 +69,12 @@ C. transitioning to the cloud opens up opportunities but it also surfaces some n
 D. we need to know how we are going to measure the success of the migration to the cloud
 E. some of our software licenses may prohibit us from running in a multi-tenant environment. we need to be sure if our existing software can be migrated to the cloud
 F. a lot of companies move from CapEx to OpEx expense model but it doesn't mean they should reconsider accounting structures
+
+![alt text](migrations_challenge2.png)
+A. Question asks about longterm costs and manageability
+
+B. Schema Conversion Tool (SCT) doesn't support noSQL databases, only DMS supports noSQL databases like MongoDB
+C. this is a lift and shift and we wouldn't achieve any sort of longterm benefits
+D. answer is D because we can move to a managed database scenario
+E. RDS doesn't support Sybase, so we cant just restore a Sybase 
+database backup to RDS because its not a supported database
