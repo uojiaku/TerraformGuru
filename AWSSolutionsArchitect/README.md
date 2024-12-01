@@ -89,3 +89,21 @@ database backup to RDS because its not a supported database
 8. Difference between DataSync and Storage Gateway is that DataSync focuses on transferring data between on-prem storage systems and AWS, whereas AWS storage gateway provides a hybrid cloud storage solution that enables on-prem applications to seamlessly use AWS cloud storage
 9. Retiring an asset is the least-cost option
 10. Homogeneous migration is when we migrate between the same type of databases.
+
+## Architecting to Scale
+![alt text](arch_to_scale_challenge1.png)
+
+Above,
+
+A. SQS is a messaging platform and is not considered a pub/sub architecture. SNS is considered a pub/sub architecture. Messages dont get pushed from SQS you have to poll the queues for those messages.
+B. Because the customer wants very high resolution multi-megabyte pictures but SNS's limit is 256K so this won't work.
+C. The maximum of in-bound message size for Kinesis 1MB, this large but not big enough to accommodate our multi-megabyte pictures.
+D. Simple WorkFlow is much more of a statusing framework than a true workflow engine. There is no weighted routing in SWF
+E. this is the answer because we can save that image to S3, then we use SQS as a worker queue for that image
+
+![alt text](arch_to_scale_challenge2.png)
+
+B. Internet gateways arent susceptible to saturation. they have no bandwidth limit so we dont think thats potentially a cause here
+C. because our demand is unpredictable, schedule scaling with scheduled instances wont really help us.
+E. Launch configurations cant be edited after its been created
+F. Step scaling policies dont have a cool down period. Rather they have a warm up period, where we can specify how long to allow our new instances to come up before another step scale can be triggered
