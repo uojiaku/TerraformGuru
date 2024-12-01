@@ -107,3 +107,15 @@ B. Internet gateways arent susceptible to saturation. they have no bandwidth lim
 C. because our demand is unpredictable, schedule scaling with scheduled instances wont really help us.
 E. Launch configurations cant be edited after its been created
 F. Step scaling policies dont have a cool down period. Rather they have a warm up period, where we can specify how long to allow our new instances to come up before another step scale can be triggered
+
+- Quiz question/answers:
+1. a shorter cool down means there will be a shorter interval until the auto scaling service determines that another x number of servers are required to service a spike in demand
+3. Kinesis Produce Library (KPL) will allow writing to Kinesis Streams and not reading from them. It performs heavy-lifting tasks associated with distributed stream processing, making it more productive to develop applications.
+4. Behaviors in CloudFront allow us to define different origins depending on the URL path. This is useful when we want to serve up static content from S3 and dynamic content from an EC2 fleet for example for the same website.
+5. We are not given the WCUs, so we are unable to determine with certainty the number of partitions.
+9. two common uses for Kinesis data streams is that it can provide real-time data analytics, and collect and process large streams of data records in real time.
+    - combines the power of parallel processing with the value of real-time data. i.e. process website clickstreams in real time and then analyze site usability engagement using multiple different Kinesis Data Streams applications running in parallel
+10. SNS doesnt provide the ability to orchestrate a workflow with multiple Lambda functions and incorporate retry logic for specific tasks
+    - Step Functions allows us to build resilient workflows by orchestrating multiple Lambda functions. We can define the flow of the order processing and incorporating retry logic for specific tasks in case of failures. Step Functions also provide visualizations of the workflows, making it easier to monitor and debug.
+14. SQS can be used as a buffer between S3 new objects events and the Lambda function. 
+    - by sending events to an SQS queue, we can ensure that Lambda processes the events at a manageable rate, even during peak periods. SQS provides a reliable and scalable message queuing service that can handle fluctuating workloads.
