@@ -119,3 +119,9 @@ F. Step scaling policies dont have a cool down period. Rather they have a warm u
     - Step Functions allows us to build resilient workflows by orchestrating multiple Lambda functions. We can define the flow of the order processing and incorporating retry logic for specific tasks in case of failures. Step Functions also provide visualizations of the workflows, making it easier to monitor and debug.
 14. SQS can be used as a buffer between S3 new objects events and the Lambda function. 
     - by sending events to an SQS queue, we can ensure that Lambda processes the events at a manageable rate, even during peak periods. SQS provides a reliable and scalable message queuing service that can handle fluctuating workloads.
+
+## Business Continuity
+![alt text](business_continuity_challenge1.png)
+B. EFS is 15 times more expensive than S3 and we'd need to keep  running EC2 instance up to perform the sync
+C. Aurora is multi-AZ by default
+D. AWS doesnt recommend using RAID5 or RAID6 because they will consume our IOPS. EBS volumes is going to be really expensive. Restoring from virtual tape library can take several hours
