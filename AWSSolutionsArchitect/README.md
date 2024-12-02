@@ -134,3 +134,12 @@ D. RAID0 doesn't provide any redundancy
 E. because were using an ELB we wouldnt use route53 to try to update routes to specific app servers. We let the ELB do the health checks for us.
 F. to ensure 10% that were going to have those resources then buying reserved instances is the only way to guarantee we would have access to those
 G. MySQL replication is only supported using NoDB database engine, so we prolly are not using the MyISAM storage engine in our MySQL server here
+
+- Quiz question/answers:
+2. Hardware failure is more like when a particular server or network component fails in a data warehouse.
+    - failure of utilities or adverse environmental conditiions are considered infrastructure disasters
+5. what is false about Redshift in the context of fault tolerance?
+    - redshift multi-node cluster are multi-AZ by default
+6. RAID0 has the highest write performance as writes are distributed across disks.
+7. Backup and Restore possesses a relatively small data size and generous RTO/RPO. it is the most cost-effect approach.
+8. Aurora Global Database allows us to failover to a secondary cluster in a different region. Our database will survive even in the unlikely event of a regional degradation or outage.
