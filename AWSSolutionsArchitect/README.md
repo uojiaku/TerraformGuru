@@ -125,3 +125,12 @@ F. Step scaling policies dont have a cool down period. Rather they have a warm u
 B. EFS is 15 times more expensive than S3 and we'd need to keep  running EC2 instance up to perform the sync
 C. Aurora is multi-AZ by default
 D. AWS doesnt recommend using RAID5 or RAID6 because they will consume our IOPS. EBS volumes is going to be really expensive. Restoring from virtual tape library can take several hours
+
+![alt text](business_continuity_challenge2.png)
+A. RDS now offers a new multi-AZ deployment option for MySQL and PostgreSQL databases, enabling automatic failover to one of two readable standby instances
+B. we can define a minimum instances for an autoscaling group 
+C. without cross-zone load balancing enabled on our ELB, each ELB endpoint will tend to use the resources that it has access to in that specific AZ
+D. RAID0 doesn't provide any redundancy
+E. because were using an ELB we wouldnt use route53 to try to update routes to specific app servers. We let the ELB do the health checks for us.
+F. to ensure 10% that were going to have those resources then buying reserved instances is the only way to guarantee we would have access to those
+G. MySQL replication is only supported using NoDB database engine, so we prolly are not using the MyISAM storage engine in our MySQL server here
