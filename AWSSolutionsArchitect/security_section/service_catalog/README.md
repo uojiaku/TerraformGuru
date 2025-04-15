@@ -9,6 +9,7 @@
 
 ## AWS Service Catalog Constraints
 - used to control how those products can get consumed.
+  
 | Type | What | Why |
 |:--------------------:|:---------------------------:|:---------------------:|
 | Launch Constraint | IAM role that Service Catalog assumes when an end-user launches a product | Without a launch constraint, the end-user must have all permissions needed within their own IAM credentials |
